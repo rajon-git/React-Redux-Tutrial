@@ -1,11 +1,29 @@
+import { useDispatch, useSelector } from "react-redux"
+import { booking } from "../../redux/booking/actions";
 
 export default function InputSection() {
+    const dispatch = useDispatch();
+    const bookings = useSelector((state) => state)
+
+    const submitHandler = (event) => {
+        event.preventDefault();
+        const fromEle = event.target;
+        const formData = {};
+        for(let i=0;i < fromEle.elements.length; i++) {
+            const element = fromEle.elements[i];
+            if(element.name){
+                formData[element.name] =element.value;
+            }
+        }
+        dispatch(booking(formData))
+        fromEle.reset();
+    }
    
     return (
         <>
             <div className="mt-[160px] mx-4 md:mt-[160px] relative">
                 <div className="bg-white rounded-md max-w-6xl w-full mx-auto">
-                    <form className="first-hero lws-inputform">
+                    <form onSubmit={submitHandler} className="first-hero lws-inputform">
                         {/* -- From  */}
                         <div className="des-from">
                             <p>Destination From</p>
@@ -70,7 +88,7 @@ export default function InputSection() {
                             </div>
                         </div>
 
-                        <button className="addCity" type="submit" id="lws-addCity" >
+                        <button className="addCity" type="submit" id="lws-addCity" disabled={bookings.length >= 3}>
                             <svg width="15px" height="15px" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                             </svg>
