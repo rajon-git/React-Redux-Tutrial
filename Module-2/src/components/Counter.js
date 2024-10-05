@@ -23,7 +23,7 @@ function Counter({count, increment,decrement}) {
     );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
         count: state.value,
     }
