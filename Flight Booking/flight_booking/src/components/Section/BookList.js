@@ -1,9 +1,17 @@
+import { useDispatch, useSelector } from "react-redux"
+import { deleteBooking } from "../../redux/booking/actions"
 
 export default function BookList() {
+    const books = useSelector((state)=>state)
+    const dispatch = useDispatch()
+
+    const bookDeleteHandler = (id) => {
+        dispatch(deleteBooking(id))
+    }
     
     return (
         <>
-            <div className="table-container">
+            {books.length > 0 && <div className="table-container">
                 <table className="booking-table">
                     <thead className="bg-gray-100/50">
                         <tr className="text-black text-left">
@@ -16,27 +24,28 @@ export default function BookList() {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-300/20" id="lws-previewBooked">
-                            <tr className="lws-bookedTable text-black">
+                      {books.map(book =>
+                            <tr key={book.id} className="lws-bookedTable text-black">
                                 <td className="px-6 py-4">
                                     <div className="flex items-center space-x-3">
-                                        <p className="lws-bookedFrom">From</p>
+                                        <p className="lws-bookedFrom">{book.from}</p>
                                     </div>
                                 </td>
                                 <td className="px-6 py-4">
-                                    <p className="lws-bookedTo">To</p>
+                                    <p className="lws-bookedTo">{book.to}</p>
                                 </td>
                                 <td className="px-6 py-4 text-center">
-                                    <p className="lws-bookedDate">Date</p>
+                                    <p className="lws-bookedDate">{book.date}</p>
                                 </td>
                                 <td className="px-6 py-4 text-center">
-                                    <p className="lws-bookedGustes">guests</p>
+                                    <p className="lws-bookedGustes">{book.guests}</p>
                                 </td>
                                 <td className="px-6 py-4 text-center">
-                                    <span className="lws-bookedClass"> ticketClass </span>
+                                    <span className="lws-bookedClass"> {book.ticketClass} </span>
                                 </td>
                                 <td className="px-6 py-4 text-center">
                                     <div className="flex justify-center gap-4">
-                                        <button  className="lws-remove">
+                                        <button onClick={() => bookDeleteHandler(book.id)}  className="lws-remove">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                                                 stroke="currentColor" className="w-6 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round"
@@ -45,10 +54,10 @@ export default function BookList() {
                                         </button>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr>)}
                     </tbody>
                 </table>
-            </div>
+            </div>}
         </>
     )
 }
