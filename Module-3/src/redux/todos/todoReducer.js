@@ -1,7 +1,7 @@
-import { ADDED, ALLCOMPLETED, COLORSELECTED, DELETED, TOGGLED } from "./actionTypes";
+import { ADDED, ALLCOMPLETED, CLEARCOMPLETED, COLORSELECTED, DELETED, TOGGLED } from "./actionTypes";
 import { initialState } from "./initialState";
 
-function nextTodoId = (todos) => {
+const nextTodoId = (todos) => {
     const maxId = todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1);
     return maxId + 1;
 }
@@ -14,43 +14,48 @@ const todoReducer = (state= initialState ,action) => {
                     id: nextTodoId(state)
                 }
             ]
-            case TOGGLED:
-                return state.map((todo) => {
-                    if(todo.id !== action.payload) {
-                        return todo;
-                    }
-                    return {
-                        ...todo,
-                        completed: !completed
-                    }
-                })
-            case COLORSELECTED:
-                const {todoId, color} = action.payload;
-                state.map((todo)=>{
-                    if(todo.id !== todoId){
-                        return todo;
-                    }
-                    return {
-                        ...todo,
-                        color: color
-                    }
-                })
+        case TOGGLED:
+            return state.map((todo) => {
+                if(todo.id !== action.payload) {
+                    return todo;
+                }
+                return {
+                    ...todo,
+                    completed: !todo.completed
+                }
+            })
+        case COLORSELECTED:
+            const {todoId, color} = action.payload;
+            state.map((todo)=>{
+                if(todo.id !== todoId){
+                    return todo;
+                }
+                return {
+                    ...todo,
+                    color: color
+                }
+            })
 
-            case DELETED:
-                return state.filter(todo => {
-                    todo.id !== action.payload
-                })
+        case DELETED:
+            return state.filter(todo => {
+                todo.id !== action.payload
+            })
 
-            case ALLCOMPLETED:
-                return state.map(todo => {
-                    return {
-                        ...todo,
-                        completed:true
-                    }
-                })
+        case ALLCOMPLETED:
+            return state.map(todo => {
+                return {
+                    ...todo,
+                    completed:true
+                }
+            })
+
+        case CLEARCOMPLETED:
+            return state.filter(todo => !todo.completed)
                 
     
         default:
             break;
     }
 }
+
+export default todoReducer;
