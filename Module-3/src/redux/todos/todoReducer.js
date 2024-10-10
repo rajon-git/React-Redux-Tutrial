@@ -5,8 +5,9 @@ const nextTodoId = (todos) => {
     const maxId = todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1);
     return maxId + 1;
 }
-const todoReducer = (state= initialState ,action) => {
+const todoReducer = (state= initialState, action) => {
     switch (action.type) {
+
         case ADDED:
             return [
                 ...state,
@@ -14,6 +15,7 @@ const todoReducer = (state= initialState ,action) => {
                     id: nextTodoId(state)
                 }
             ]
+
         case TOGGLED:
             return state.map((todo) => {
                 if(todo.id !== action.payload) {
@@ -24,6 +26,7 @@ const todoReducer = (state= initialState ,action) => {
                     completed: !todo.completed
                 }
             })
+
         case COLORSELECTED:
             const {todoId, color} = action.payload;
             state.map((todo)=>{
@@ -54,7 +57,7 @@ const todoReducer = (state= initialState ,action) => {
                 
     
         default:
-            break;
+            return state;
     }
 }
 
