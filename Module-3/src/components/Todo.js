@@ -1,7 +1,7 @@
 import React from "react";
 import cancelImg from "../assets/images/cancel.png";
 import { useDispatch } from "react-redux";
-import { toggled } from "../redux/todos/actions";
+import { colorselected, toggled } from "../redux/todos/actions";
 
 export default function Todo({todo}) {
   const dispatch = useDispatch()
@@ -9,6 +9,9 @@ export default function Todo({todo}) {
   const {text,id,completed,color}= todo;
   const handleStatusChanged = (todoId) => {
     dispatch(toggled(todoId));
+  }
+  const handleColorChanged = (todoId,color) => {
+    dispatch(colorselected(todoId,color))
   }
   return (
     <div>
@@ -32,9 +35,12 @@ export default function Todo({todo}) {
           {text}
         </div>
 
-        <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-green-500 ${color === 'green' && 'border-green-500  bg-green-500'}`}></div>
-        <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-yellow-500 ${color === 'yellow' && 'border-yellow-500  bg-yellow-500'}`}></div>
-        <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-red-500 ${color === 'red' && 'border-red-500  bg-red-500'}`}></div>
+        <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-green-500 ${color === 'green' && 'border-green-500  bg-green-500'}`}
+        onClick={handleColorChanged(id,"green")}></div>
+        <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-yellow-500 ${color === 'yellow' && 'border-yellow-500  bg-yellow-500'}`}
+        onClick={handleColorChanged(id,"yellow")}></div>
+        <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-red-500 ${color === 'red' && 'border-red-500  bg-red-500'}`}
+        onClick={handleColorChanged(id,"red")}></div>
 
         
         <img
