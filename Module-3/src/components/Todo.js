@@ -24,12 +24,11 @@ export default function Todo({todo}) {
           {text}
         </div>
 
-        <div className="flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-green-500 hover:bg-green-500 bg-green-500"></div>
+        <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-green-500 ${color === 'green' && 'border-green-500  bg-green-500'}`}></div>
+        <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-yellow-500 ${color === 'yellow' && 'border-yellow-500  bg-yellow-500'}`}></div>
+        <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-red-500 ${color === 'red' && 'border-red-500  bg-red-500'}`}></div>
 
-        <div className="flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-yellow-500 hover:bg-yellow-500"></div>
-
-        <div className="flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-red-500 hover:bg-red-500"></div>
-
+        
         <img
           src={cancelImg}
           className="flex-shrink-0 w-4 h-4 ml-2 cursor-pointer"
