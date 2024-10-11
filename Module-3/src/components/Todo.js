@@ -1,7 +1,7 @@
 import React from "react";
 import cancelImg from "../assets/images/cancel.png";
 
-export default function Todo() {
+export default function Todo({todo}) {
   return (
     <div>
       <div className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0">
@@ -16,7 +16,7 @@ export default function Todo() {
         </div>
 
         <div className="select-none flex-1">
-          Learn Redux from Think in a Redux way course
+          {todo.text}
         </div>
 
         <div className="flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-green-500 hover:bg-green-500 bg-green-500"></div>
