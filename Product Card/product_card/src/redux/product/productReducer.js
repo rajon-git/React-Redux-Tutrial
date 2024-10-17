@@ -1,4 +1,4 @@
-import { ADD_MANY_QUANTITY, ADD_PRODUCT, ADD_PRODUCT_QUANTITY, REMOVE_PRODUCT_QUANTITY } from "./actionType";
+import { ADD_MANY_QUANTITY, ADD_PRODUCT, ADD_PRODUCT_QUANTITY, REMOVE_PRODUCT_QUANTITY } from "./actionTypes";
 
 const nextId = (state)=> state.reduce((maxID, item)=>Math.max(item.id, maxID), -1) +1;
 const initialState = []

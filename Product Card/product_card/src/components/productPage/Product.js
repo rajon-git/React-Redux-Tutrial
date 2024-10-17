@@ -1,20 +1,21 @@
-import React from 'react'
+import { useDispatch } from "react-redux"
 
-export default function Product() {
-  return (
-    <div>
-      <div className="lws-productCard">
-          <img className="lws-productImage" src="https://i.dummyjson.com/data/products/40/thumbnail.jpg" alt="product" />
+
+export default function Product({product}){
+  const dispatch = useDispatch();
+  
+  const { name, category, imgUrl, price, quantity } = product
+  return(
+        <div className="lws-productCard">
+          <img className="lws-productImage" src={imgUrl} alt={name} />
           <div className="p-4 space-y-2">
-            <h4 className="lws-productName">Women Winter Clothes</h4>
-            <p className="lws-productCategory">Tops</p>
+            <h4 className="lws-productName">{name}</h4>
+            <p className="lws-productCategory">{category}</p>
             <div className="flex items-center justify-between pb-2">
-              <p className="productPrice">BDT <span className="lws-price">100</span></p>
-              <p className="productQuantity">QTY <span className="lws-quantity">30</span></p>
+              <p className="productPrice">BDT <span className="lws-price">{price}</span></p>
+              <p className="productQuantity">QTY <span className="lws-quantity">{quantity}</span></p>
             </div>
-            <button className="lws-btnAddToCart">Add To Cart</button>
+            <button disabled={product.quantity <= 0} className="lws-btnAddToCart">Add To Cart</button>
           </div>
         </div>
-    </div>
-  )
-}
+  )};
