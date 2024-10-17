@@ -12,8 +12,6 @@ export default function CartPage() {
         <div class="space-y-6">
             <CartItem/>
         </div>
-
-      
         <div>
           <BillSection/>
         </div>
